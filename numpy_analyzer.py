@@ -34,25 +34,93 @@ def create_array():
                     no = input("Enter the number(seperated by space) : ").split(" ")
                     number = [int(i) for i in no]
                     arr = np.array(number)
-                    print("A 1D array is created")
-                    return
+                    break
                 case "2":
                     row = int(input("Enter the no. of row : "))
                     col = int(input("Enter the no. of column : "))
-                    no = input(f"Enter {row * col} element(seperated by space) : ")
+                    no = input(
+                        f"Enter {row * col} element(seperated by space) : "
+                    ).split(" ")
+                    if not (row and col):
+                        print("Enter the valid number not 0.")
+                        continue
                     number = []
-                    for i in range(0, row):
+                    ic = 0
+                    for _ in range(0, row):
                         de = []
-                        for j in range(0, col):
-                            de.append(no[i * col + j])
+                        for _ in range(0, col):
+                            de.append(int(no[ic]))
+                            ic += 1
                         number.append(de)
                     arr = np.array(number)
+                    break
                 case "3":
-                    pass
+                    row = int(input("Enter the no. of row : "))
+                    col = int(input("Enter the no. of column : "))
+                    page = int(input("Enter the no. od pages : "))
+                    if not (row and col and page):
+                        print("Enter the valid number not 0.")
+                        continue
+                    no = input(
+                        f"Enter {page * row * col} element(seperated by space) : "
+                    ).split(" ")
+                    ic = 0
+                    number = []
+                    for _ in range(0, page):
+                        demo = []
+                        for _ in range(0, row):
+                            de = []
+                            for _ in range(0, col):
+                                de.append(int(no[ic]))
+                                ic += 1
+                            demo.append(de)
+                        number.append(demo)
+                    arr = np.array(number)
+                    break
                 case _:
                     print("Invalid Choice")
         except ValueError:
             print("Enter the integer only")
+    print("The array is successfully created ::-")
+    print(arr)
+    basic_op()
+
+
+def basic_op():
+    while True:
+        print("--------------------")
+        print("Choose any operation")
+        print("1. Indexing")
+        print("2. Slicing")
+        print("3. Jump to main menu")
+        cho = input("Enter your choice : ")
+        try:
+            match cho:
+                case "1":
+                    if arr.ndim == 1:
+                        row_i = int(input("Enter the index : "))
+                        print(":-", arr[row_i])
+                    elif arr.ndim == 2:
+                        row_col = input("Enter the index (row column) : ").split(" ")
+                        print(arr[int(row_col[0])][int(row_col[1])])
+                    elif arr.ndim == 3:
+                        pag_row_col = input(
+                            "Enter the index (page row column) : "
+                        ).split(" ")
+                        print(
+                            arr[int(pag_row_col[0])][int(pag_row_col[1])][
+                                int(pag_row_col[2])
+                            ]
+                        )
+                    else:
+                        print("Please retry again")
+                case "2":
+                    pass
+                case "3":
+                    print("Thank you")
+                    break
+        except ValueError:
+            print("Enter the integer as instructed")
 
 
 def main():
