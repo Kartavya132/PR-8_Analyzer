@@ -9,7 +9,7 @@ def show_menu():
 
     print("---------------------------")
     print("|-----Numpy main menu-----|")
-    print("-----------------------")
+    print("---------------------------")
     print("1. Create a Numpy Array")
     print("2. Perform mathematics Operations")
     print("3. Combine / Split Arrays")
@@ -41,6 +41,9 @@ def create_array():
                     no = input(
                         f"Enter {row * col} element(seperated by space) : "
                     ).split(" ")
+                    if len(no) != row * col:
+                        print("Please enter proper no. of elements")
+                        continue
                     if not (row and col):
                         print("Enter the valid number not 0.")
                         continue
@@ -64,6 +67,9 @@ def create_array():
                     no = input(
                         f"Enter {page * row * col} element(seperated by space) : "
                     ).split(" ")
+                    if len(no) != (page * row * col):
+                        print("Please enter proper no. of elements")
+                        continue
                     ic = 0
                     number = []
                     for _ in range(0, page):
@@ -94,6 +100,7 @@ def basic_op():
         print("2. Slicing")
         print("3. Jump to main menu")
         cho = input("Enter your choice : ")
+        print("--------------------")
         try:
             match cho:
                 case "1":
@@ -108,19 +115,101 @@ def basic_op():
                             "Enter the index (page row column) : "
                         ).split(" ")
                         print(
+                            ":-",
                             arr[int(pag_row_col[0])][int(pag_row_col[1])][
                                 int(pag_row_col[2])
-                            ]
+                            ],
                         )
                     else:
                         print("Please retry again")
                 case "2":
-                    pass
+                    if arr.ndim == 1:
+                        row_s = input("Enter the range (start:stop) : ").split(":")
+                        print(":-", arr[int(row_s[0]) : int(row_s[1])])
+                    elif arr.ndim == 2:
+                        row_s = input("Enter the range of row (start:stop) : ").split(
+                            ":"
+                        )
+                        col_s = input(
+                            "Enter the range of column (start:stop) : "
+                        ).split(":")
+                        print(
+                            ":-",
+                            arr[int(row_s[0]) : int(row_s[1])][
+                                int(col_s[0]) : int(col_s[1])
+                            ],
+                        )
+                    elif arr.ndim == 3:
+                        pag_s = input("Enter the range of page (start:stop) : ").split(
+                            ":"
+                        )
+                        row_s = input("Enter the range of row (start:stop) : ").split(
+                            ":"
+                        )
+                        col_s = input(
+                            "Enter the range of column (start:stop) : "
+                        ).split(":")
+                        print(
+                            ":-",
+                            arr[int(row_s[0]) : int(row_s[1])][
+                                int(col_s[0]) : int(col_s[1])
+                            ][int(pag_s[0]) : int(pag_s[1])],
+                        )
                 case "3":
                     print("Thank you")
                     break
+                case _:
+                    print("Enter valid choice")
         except ValueError:
             print("Enter the integer as instructed")
+
+
+def math_arr():
+    if arr:
+        while True:
+            print("--------------------")
+            print("Mathematics menu")
+            print("1. Addition")
+            print("2. Subtraction")
+            print("3. Multiplication")
+            print("4. Division")
+            print("5. Exit")
+            cho = input("Enter your choice : ")
+            if cho == "5":
+                print("Thank you")
+                break
+            s_no = input(f"Enter {arr.size} elements(seperated by space) : ").split(" ")
+            if len(s_no) != arr.size:
+                print("Please enter proper no. of elements")
+                continue
+            try:
+                s_num = [int(i) for i in s_no]
+                sec_arr = np.array(s_num).reshape(arr.shape)
+            except ValueError:
+                print("Enter the integer as per instruction")
+                continue
+            match cho:
+                case "1":
+                    print(f"Original array:-\n{arr}")
+                    print(f"Second array:-\n{sec_arr}")
+                    print(f"The new array:-\n{arr + sec_arr}")
+                case "2":
+                    print(f"Original array:-\n{arr}")
+                    print(f"Second array:-\n{sec_arr}")
+                    print(f"The new array:-\n{arr - sec_arr}")
+                case "3":
+                    print(f"Original array:-\n{arr}")
+                    print(f"Second array:-\n{sec_arr}")
+                    print(f"The new array:-\n{arr * sec_arr}")
+                case "4":
+                    try:
+                        print(f"Original array:-\n{arr}")
+                        print(f"Second array:-\n{sec_arr}")
+                        print(f"The new array:-\n{arr / sec_arr}")
+                    except ZeroDivisionError:
+                        print("Don't enter zero for division")
+    else:
+        print("There is no saved array")
 
 
 def main():
@@ -131,7 +220,7 @@ def main():
             case "1":
                 create_array()
             case "2":
-                pass
+                math_arr()
             case "3":
                 pass
             case "4":
