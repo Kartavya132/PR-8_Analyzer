@@ -1,4 +1,4 @@
-import numpy
+import numpy as np
 from sys import exit
 
 
@@ -20,6 +20,7 @@ def show_menu():
 
 
 def create_array():
+    global arr
     while True:
         print("----------------------")
         print("Select the type of array")
@@ -30,9 +31,22 @@ def create_array():
         try:
             match typ:
                 case "1":
-                    pass
+                    no = input("Enter the number(seperated by space) : ").split(" ")
+                    number = [int(i) for i in no]
+                    arr = np.array(number)
+                    print("A 1D array is created")
+                    return
                 case "2":
-                    pass
+                    row = int(input("Enter the no. of row : "))
+                    col = int(input("Enter the no. of column : "))
+                    no = input(f"Enter {row * col} element(seperated by space) : ")
+                    number = []
+                    for i in range(0, row):
+                        de = []
+                        for j in range(0, col):
+                            de.append(no[i * col + j])
+                        number.append(de)
+                    arr = np.array(number)
                 case "3":
                     pass
                 case _:
@@ -47,7 +61,7 @@ def main():
         print("-----------------------")
         match choi:
             case "1":
-                pass
+                create_array()
             case "2":
                 pass
             case "3":
@@ -63,3 +77,7 @@ def main():
                 exit()
             case _:
                 print("Invalid Choice!!")
+
+
+if __name__ == "__main__":
+    main()
