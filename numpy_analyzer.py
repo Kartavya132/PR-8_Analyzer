@@ -294,9 +294,48 @@ def combine_split():
                         print(f"The new array:-\n{arr}")
                     else:
                         print("Invalid choice")
+                case "3":
+                    print("Thank you")
+                    break
                 case _:
                     print("Invalid input")
 
+    else:
+        print("There is no saved array")
+
+
+def sear_sort_filt():
+    if arr.size < 1:
+        while True:
+            print("-------------------")
+            print("Choose ant option::")
+            print("1. Search a value")
+            print("2. Sort the array")
+            print("3. Filter values")
+            print("4. Exit")
+            cho = input("Enter the choice : ")
+            match cho:
+                case "1":
+                    try:
+                        search = int(input("Enter the element for search"))
+                    except ValueError:
+                        print("Invalid input")
+                        continue
+                    result = np.where(arr == search)
+                    if result.size < 1:
+                        print(f"The element {search} is not in array")
+                    print(f"The search came in {result} index")
+                case "2":
+                    print(f"Original array:-\n{arr}")
+                    arr = np.sort(arr)
+                    print(f"The sorted array:-\n{arr} ")
+                case "3":
+                    pass
+                case "4":
+                    print("Thank you")
+                    break
+                case _:
+                    print("Invalid choice")
     else:
         print("There is no saved array")
 
@@ -314,7 +353,7 @@ def main():
             case "3":
                 combine_split()
             case "4":
-                pass
+                sear_sort_filt()
             case "5":
                 pass
             case "6":
