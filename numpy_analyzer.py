@@ -165,7 +165,8 @@ def basic_op():
 
 
 def math_arr():
-    if arr:
+    global arr
+    if not arr.size < 1:
         while True:
             print("--------------------")
             print("Mathematics menu")
@@ -208,11 +209,100 @@ def math_arr():
                         print(f"The new array:-\n{arr / sec_arr}")
                     except ZeroDivisionError:
                         print("Don't enter zero for division")
+                case _:
+                    print("Invalid choice")
+    else:
+        print("There is no saved array")
+
+
+def combine_split():
+    global arr
+    if not arr.size < 1:
+        while True:
+            print("------------------------")
+            print("Choose an option")
+            print("1. Combine")
+            print("2. Split")
+            print("3. Exit")
+            cho = input("Enter your choice : ")
+            match cho:
+                case "1":
+                    c_no = input(
+                        f"Enter {arr.size} elements(seperated by space) : "
+                    ).split(" ")
+                    if len(c_no) != arr.size:
+                        print("Please enter proper no. of elements")
+                        continue
+                    try:
+                        c_num = [int(i) for i in c_no]
+                        sec_arr = np.array(c_num).reshape(arr.shape)
+                    except ValueError:
+                        print("Enter the integer as per instruction")
+                        continue
+                    vert_hori = input("Enter 1: vertical stack, 2: horizontal stack : ")
+                    match vert_hori:
+                        case "1":
+                            print(f"Origial array:-\n{arr}")
+                            arr = np.vstack((arr, sec_arr))
+                        case "2":
+                            print(f"Origial array:-\n{arr}")
+                            arr = np.hstack((arr, sec_arr))
+                        case _:
+                            print("Invalid choice")
+                            continue
+                    print(f"Second array:-\n{sec_arr}")
+                    print(f"The new array:-\n{arr}")
+                case "2":
+                    if arr.size <= 1:
+                        print("You can't split this 1 element in the array")
+                        break
+                    if arr.ndim == 1:
+                        row_s = input("Enter the range to split(start:end)").split(":")
+                        try:
+                            row_s = [int(i) for i in row_s]
+                        except ValueError:
+                            print("Invalid input, Enter the integer")
+                        print(f"Original array:-\n{arr}")
+                        arr = arr[row_s[0] : row_s[1]]
+                        print(f"The new array:-\n{arr}")
+                    elif arr.ndim == 2:
+                        row_s = input("Enter the range of row (start:stop) : ").split(
+                            ":"
+                        )
+                        col_s = input(
+                            "Enter the range of column (start:stop) : "
+                        ).split(":")
+
+                        arr = arr[int(row_s[0]) : int(row_s[1])][
+                            int(col_s[0]) : int(col_s[1])
+                        ]
+                        print(f"The new array:-\n{arr}")
+                    elif arr.ndim == 3:
+                        pag_s = input("Enter the range of page (start:stop) : ").split(
+                            ":"
+                        )
+                        row_s = input("Enter the range of row (start:stop) : ").split(
+                            ":"
+                        )
+                        col_s = input(
+                            "Enter the range of column (start:stop) : "
+                        ).split(":")
+
+                        arr = arr[int(row_s[0]) : int(row_s[1])][
+                            int(col_s[0]) : int(col_s[1])
+                        ][int(pag_s[0]) : int(pag_s[1])]
+                        print(f"The new array:-\n{arr}")
+                    else:
+                        print("Invalid choice")
+                case _:
+                    print("Invalid input")
+
     else:
         print("There is no saved array")
 
 
 def main():
+    arr = np.array([])
     while True:
         choi = show_menu()
         print("-----------------------")
@@ -222,7 +312,7 @@ def main():
             case "2":
                 math_arr()
             case "3":
-                pass
+                combine_split()
             case "4":
                 pass
             case "5":
