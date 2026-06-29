@@ -361,23 +361,35 @@ class numpy_analyzer:
             print("3. Median")
             print("4. Standard deviation")
             print("5. Variance")
+            print("6. Exit")
             cho = input("Enter the choice : ")
 
             match cho:
                 case "1":
-                    print(f"The sum of all elements in the array\n:-{arr.sum()}")
+                    print(
+                        f"The sum of all elements in the array\n:-{round(arr.sum(),2)}"
+                    )
                 case "2":
-                    print(f"The mean of all the elements in the array\n:-{arr.mean()}")
+                    print(
+                        f"The mean of all the elements in the array\n:-{round(arr.mean(),2)}"
+                    )
                 case "3":
                     print(
-                        f"The median of all the elements in the array\n:-{np.median(arr)}"
+                        f"The median of all the elements in the array\n:-{round(np.median(arr),2)}"
                     )
                 case "4":
                     print(
-                        f"The standard deviation of all the elements in array\n:-{np.std(arr)}"
+                        f"The standard deviation of all the elements in array\n:-{round(np.std(arr),2)}"
                     )
                 case "5":
-                    print(f"The variance of all elements in the array\n:-{np.var(arr)}")
+                    print(
+                        f"The variance of all elements in the array\n:-{round(np.var(arr),2)}"
+                    )
+                case "6":
+                    print("Thank you")
+                    return
+                case _:
+                    print("Invalid Input")
 
 
 def show_menu():
