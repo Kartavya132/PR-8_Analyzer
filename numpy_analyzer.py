@@ -326,8 +326,8 @@ class numpy_analyzer:
                     if result[0].size == 0:
                         print(f"The element {search} is not in array")
                     else:
-                        indices = list(zip(*result))
-                        print(f"The search found indices: {indices}")
+                        indices = list(result)
+                        print(f"The search found indices: {indices[0:]}")
                 case "2":
                     print(f"Original array:-\n{arr}")
                     self.arr = np.sort(arr)
@@ -367,7 +367,6 @@ def show_menu():
 
 def main():
     numpy_al = numpy_analyzer()
-    numpy_al.create_array()
     while True:
         choi = show_menu()
         print("-----------------------")
