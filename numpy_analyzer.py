@@ -347,6 +347,38 @@ class numpy_analyzer:
                 case _:
                     print("Invalid choice")
 
+    def aggre_stat(self):
+        if self.arr is None or self.arr.size < 1:
+            print("There is no saved array")
+            return
+
+        arr = self.arr
+        while True:
+            print("-------------------")
+            print("Choose the option")
+            print("1. Sum")
+            print("2. Mean")
+            print("3. Median")
+            print("4. Standard deviation")
+            print("5. Variance")
+            cho = input("Enter the choice : ")
+
+            match cho:
+                case "1":
+                    print(f"The sum of all elements in the array\n:-{arr.sum()}")
+                case "2":
+                    print(f"The mean of all the elements in the array\n:-{arr.mean()}")
+                case "3":
+                    print(
+                        f"The median of all the elements in the array\n:-{np.median(arr)}"
+                    )
+                case "4":
+                    print(
+                        f"The standard deviation of all the elements in array\n:-{np.std(arr)}"
+                    )
+                case "5":
+                    print(f"The variance of all elements in the array\n:-{np.var(arr)}")
+
 
 def show_menu():
     print("----------------------------------------")
@@ -380,7 +412,7 @@ def main():
             case "4":
                 numpy_al.sear_sort_filt()
             case "5":
-                pass
+                numpy_al.aggre_stat()
             case "6":
                 print("Thank you for using numpy analyzer")
                 print("Good Bye")
