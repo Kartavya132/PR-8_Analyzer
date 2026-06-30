@@ -76,6 +76,7 @@ class numpy_analyzer:
         self.arr = arr
         print("The array is successfully created ::-")
         print(self.arr)
+        self.basic_op()
         return self.arr
 
     def basic_op(self):
@@ -404,7 +405,7 @@ def show_menu():
     print("2. Perform mathematics Operations")
     print("3. Combine / Split Arrays")
     print("4. Search, Sort, or filter from array")
-    print("5. Compute Aggregates aand statistics")
+    print("5. Compute Aggregates and statistics")
     print("6. Exit")
     return input("Enter the choice :")
 
